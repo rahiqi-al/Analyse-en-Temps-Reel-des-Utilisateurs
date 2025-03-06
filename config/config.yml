@@ -1,0 +1,6 @@
+INGESTION:
+  URL: https://randomuser.me/api/?results=10
+PRODUCER:
+  CONFIG : {'bootstrap.servers': 'localhost:9092'}
+  TOPIC_NAME : random_user_data
+
