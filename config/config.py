@@ -15,6 +15,12 @@ class Config :
 
 
 
+        server=os.getenv('KAFKA_BOOTSTRAP_SERVERS')
+        connection_string=os.getenv('CONNECTION_STRING')
+
+
+
+
 
 
 

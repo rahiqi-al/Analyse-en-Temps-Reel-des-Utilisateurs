@@ -67,4 +67,3 @@ def producer():
     except Exception as e :
         logger.exception('producer error ')
 
-producer()

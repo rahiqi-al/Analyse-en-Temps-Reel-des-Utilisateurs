@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 def store_mongodb(batch_df, batch_id):
     client = None
     try:
-        client = MongoClient("mongodb://localhost:27017/")
+        client = MongoClient(config.connection_string)
         db = client["randomUserDB"]
         collection = db["users"]
         
@@ -145,7 +145,7 @@ def consumer():
                 StructField("version", StringType(), True)
             ]), True)])  
 
-        df = spark.readStream.format('kafka').option("kafka.bootstrap.servers", "localhost:9092").option("subscribe", "random_user_data").option("startingOffsets", "earliest").option("group.id", "spark-streaming-test").load()
+        df = spark.readStream.format('kafka').option("kafka.bootstrap.servers", config.server).option("subscribe", config.topic_name).option("startingOffsets", "earliest").option("group.id", "spark-streaming-test").load()
 
 
         df = df.select(from_json(col("value").cast("string"), schema).alias("data")).select("data.results")
@@ -160,4 +160,5 @@ def consumer():
     finally:
         if spark:
             spark.stop()
+
 
