@@ -162,4 +162,3 @@ def consumer():
             spark.stop()
 
 
-consumer()
